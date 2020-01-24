@@ -51,8 +51,8 @@ test:
     - ecp-get-cookie --help
     # run automated tests
     - python -m pytest --pyargs ciecplib
-    # sanity check manuals
-    - man -w ecp-get-cert  # [not win]
+    # sanity check manuals (only on osx for simplicity)
+    - man -w ecp-get-cert  # [osx]
 
 about:
   home: "https://ciecplib.readthedocs.io"
