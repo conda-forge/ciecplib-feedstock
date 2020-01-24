@@ -1,5 +1,5 @@
 {% set name = "ciecplib" %}
-{% set version = "0.1.0" %}
+{% set version = "0.1.1" %}
 
 package:
   name: "{{ name|lower }}"
@@ -7,21 +7,26 @@ package:
 
 source:
   url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: e44c6e4326036159e6e41f6a8e95ac8a1f06ee08f7a947c592687ab70bbf2283
+  sha256: 2d62d1e61cffb6d1c29295cab9c49b9152f0f82e21d6c41a9cd565783bcb7550
 
 build:
   entry_points:
     - "ecp-cert-info = ciecplib.tool.ecp_cert_info:main"
-    - "ecp-cookie-init = ciecplib.tool.ecp_cookie_init:main"
     - "ecp-curl = ciecplib.tool.ecp_curl:main"
     - "ecp-get-cert = ciecplib.tool.ecp_get_cert:main"
+    - "ecp-get-cookie = ciecplib.tool.ecp_get_cookie:main"
   number: 0
   script: "{{ PYTHON }} -m pip install . -vv"
   skip: true  # [win and py<34]
 
 requirements:
   host:
+    - argparse-manpage  # [not win]
+    - lxml  # [not win]
+    - m2crypto  # [not win]
     - pip
+    - pykerberos  # [not win]
+    - pyopenssl  # [not win]
     - python
     - setuptools
   run:
@@ -39,11 +44,15 @@ test:
     - mock  # [py<33]
     - pytest
   commands:
+    # validate entry points
     - ecp-cert-info --help
-    - ecp-cookie-init --help
     - ecp-curl --help
     - ecp-get-cert --help
+    - ecp-get-cookie --help
+    # run automated tests
     - python -m pytest --pyargs ciecplib
+    # sanity check manuals (only on osx for simplicity)
+    - man -w ecp-get-cert  # [osx]
 
 about:
   home: "https://ciecplib.readthedocs.io"
