@@ -22,7 +22,11 @@ build:
 requirements:
   host:
     - argparse-manpage  # [not win]
+    - lxml  # [not win]
+    - m2crypto  # [not win]
     - pip
+    - pykerberos  # [not win]
+    - pyopenssl  # [not win]
     - python
     - setuptools
   run:
