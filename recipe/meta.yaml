@@ -12,15 +12,16 @@ source:
 build:
   entry_points:
     - "ecp-cert-info = ciecplib.tool.ecp_cert_info:main"
-    - "ecp-cookie-init = ciecplib.tool.ecp_cookie_init:main"
     - "ecp-curl = ciecplib.tool.ecp_curl:main"
     - "ecp-get-cert = ciecplib.tool.ecp_get_cert:main"
+    - "ecp-get-cookie = ciecplib.tool.ecp_get_cookie:main"
   number: 0
   script: "{{ PYTHON }} -m pip install . -vv"
   skip: true  # [win and py<34]
 
 requirements:
   host:
+    - argparse-manpage  # [not win]
     - pip
     - python
     - setuptools
@@ -39,11 +40,15 @@ test:
     - mock  # [py<33]
     - pytest
   commands:
+    # validate entry points
     - ecp-cert-info --help
-    - ecp-cookie-init --help
     - ecp-curl --help
     - ecp-get-cert --help
+    - ecp-get-cookie --help
+    # run automated tests
     - python -m pytest --pyargs ciecplib
+    # sanity check manuals
+    - man -w ecp-get-cert  # [not win]
 
 about:
   home: "https://ciecplib.readthedocs.io"
