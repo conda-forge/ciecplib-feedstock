@@ -51,7 +51,7 @@ test:
     # run automated tests
     - python -m pytest --pyargs ciecplib
     # sanity check manuals
-    - man -w ecp-get-cert
+    - man -M ${PREFIX}/share/man -w ecp-get-cert
 
 about:
   home: https://ciecplib.readthedocs.io
