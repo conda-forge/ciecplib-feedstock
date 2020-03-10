@@ -15,34 +15,33 @@ build:
     - ecp-curl = ciecplib.tool.ecp_curl:main
     - ecp-get-cert = ciecplib.tool.ecp_get_cert:main
     - ecp-get-cookie = ciecplib.tool.ecp_get_cookie:main
+  noarch: python
   number: 0
   script: {{ PYTHON }} -m pip install . -vv
-  skip: true  # [win and py<34]
 
 requirements:
   host:
-    - argparse-manpage  # [not win]
-    - lxml  # [not win]
-    - m2crypto  # [not win]
     - pip
-    - pykerberos  # [not win]
-    - pyopenssl  # [not win]
-    - python
+    - python >=3.5
     - setuptools
-  run:
-    - lxml
+    - argparse-manpage
     - m2crypto
-    - pykerberos  # [not win]
     - pyopenssl
-    - python
-    - winkerberos  # [win]
+    - requests
+    - requests-ecp
+  run:
+    - m2crypto
+    - pyopenssl
+    - python >=3.5
+    - requests
+    - requests-ecp
 
 test:
   imports:
     - ciecplib
   requires:
-    - mock  # [py<33]
     - pytest
+    - requests-mock
   commands:
     # validate entry points
     - ecp-cert-info --help
@@ -51,8 +50,8 @@ test:
     - ecp-get-cookie --help
     # run automated tests
     - python -m pytest --pyargs ciecplib
-    # sanity check manuals (only on osx for simplicity)
-    - man -w ecp-get-cert  # [osx]
+    # sanity check manuals
+    - man -w ecp-get-cert
 
 about:
   home: https://ciecplib.readthedocs.io
