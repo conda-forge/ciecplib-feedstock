@@ -1,22 +1,22 @@
 {% set name = "ciecplib" %}
-{% set version = "0.1.1" %}
+{% set version = "0.2.0" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: 2d62d1e61cffb6d1c29295cab9c49b9152f0f82e21d6c41a9cd565783bcb7550
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 30125a30fd7a303a69c79c84973c56bddc4b3808c0cf360c76e3039726f2a106
 
 build:
   entry_points:
-    - "ecp-cert-info = ciecplib.tool.ecp_cert_info:main"
-    - "ecp-curl = ciecplib.tool.ecp_curl:main"
-    - "ecp-get-cert = ciecplib.tool.ecp_get_cert:main"
-    - "ecp-get-cookie = ciecplib.tool.ecp_get_cookie:main"
+    - ecp-cert-info = ciecplib.tool.ecp_cert_info:main
+    - ecp-curl = ciecplib.tool.ecp_curl:main
+    - ecp-get-cert = ciecplib.tool.ecp_get_cert:main
+    - ecp-get-cookie = ciecplib.tool.ecp_get_cookie:main
   number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [win and py<34]
 
 requirements:
@@ -55,13 +55,13 @@ test:
     - man -w ecp-get-cert  # [osx]
 
 about:
-  home: "https://ciecplib.readthedocs.io"
-  doc_url: "https://ciecplib.readthedocs.io"
-  dev_url: "https://github.com/duncanmmacleod/ciecplib/"
-  license: "GPL-3.0-or-later"
-  license_family: "GPL"
-  license_file: "LICENSE"
-  summary: "A python client for SAML ECP authentication"
+  home: https://ciecplib.readthedocs.io
+  doc_url: https://ciecplib.readthedocs.io
+  dev_url: https://github.com/duncanmmacleod/ciecplib/
+  license: GPL-3.0-or-later
+  license_family: GPL
+  license_file: LICENSE
+  summary: A python client for SAML ECP authentication
   description: |
     This python package provides a native Python client to access
     SAML/ECP-authenticated content over HTTP with CILogon.
