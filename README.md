@@ -5,7 +5,7 @@ Home: https://ciecplib.readthedocs.io
 
 Package license: GPL-3.0-or-later
 
-Feedstock license: BSD 3-Clause
+Feedstock license: BSD-3-Clause
 
 Summary: A python client for SAML ECP authentication
 
