@@ -5,9 +5,13 @@ Home: https://ciecplib.readthedocs.io
 
 Package license: GPL-3.0-or-later
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/ciecplib-feedstock/blob/master/LICENSE.txt)
 
 Summary: A python client for SAML ECP authentication
+
+Development: https://github.com/duncanmmacleod/ciecplib/
+
+Documentation: https://ciecplib.readthedocs.io
 
 This python package provides a native Python client to access
 SAML/ECP-authenticated content over HTTP with CILogon.
