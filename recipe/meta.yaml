@@ -8,6 +8,9 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 01192d43ee15423898da8d3543ee412237ccc1e98703231adf19d642f9c00953
+  patches:
+    # we need to use the legacy setuptools.build_meta backend
+    - setuptools_build_meta_legacy.patch
 
 build:
   entry_points:
