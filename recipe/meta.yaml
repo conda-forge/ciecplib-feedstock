@@ -23,7 +23,7 @@ requirements:
   host:
     - pip
     - python >=3.5
-    - setuptools
+    - setuptools >=30.3.0
     - argparse-manpage
     - m2crypto
     - pyopenssl
@@ -37,19 +37,20 @@ requirements:
     - requests-ecp
 
 test:
-  imports:
-    - ciecplib
   requires:
+    - pip
     - pytest
     - requests-mock
   commands:
+    # check dependencies
+    - python -m pip check
+    # run automated tests
+    - python -m pytest --pyargs ciecplib
     # validate entry points
     - ecp-cert-info --help
     - ecp-curl --help
     - ecp-get-cert --help
     - ecp-get-cookie --help
-    # run automated tests
-    - python -m pytest --pyargs ciecplib
     # sanity check manuals
     - man -M ${PREFIX}/share/man -w ecp-get-cert
 
