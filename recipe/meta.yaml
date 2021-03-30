@@ -1,5 +1,5 @@
 {% set name = "ciecplib" %}
-{% set version = "0.4.2" %}
+{% set version = "0.4.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 01192d43ee15423898da8d3543ee412237ccc1e98703231adf19d642f9c00953
-  patches:
-    # we need to use the legacy setuptools.build_meta backend
-    - setuptools_build_meta_legacy.patch
+  sha256: 83955c0a7818c169f423f89fd8c4e17693eb275b1e5b862db01380ecc405088c
 
 build:
   entry_points:
@@ -42,7 +39,7 @@ requirements:
 test:
   requires:
     - pip
-    - pytest
+    - pytest >=3.9.0
     - requests-mock
   commands:
     # check dependencies
