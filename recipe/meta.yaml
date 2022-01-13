@@ -1,5 +1,5 @@
 {% set name = "ciecplib" %}
-{% set version = "0.4.3" %}
+{% set version = "0.4.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 83955c0a7818c169f423f89fd8c4e17693eb275b1e5b862db01380ecc405088c
+  sha256: dc115e315b6a9d38e7613ddb43a140dec0261595ffddbf82621a980cc17cd141
 
 build:
   entry_points:
