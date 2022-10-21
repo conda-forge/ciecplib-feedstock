@@ -1,5 +1,5 @@
 {% set name = "ciecplib" %}
-{% set version = "0.5.1" %}
+{% set version = "0.6.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 4030a85ea672ea343c3a1488b110856310fd6f7c734af8b36821b3eb55ed7d29
+  sha256: 496007dd1eec681ec1314fc89036c6bc5e7a72ec653d84fd3bf852bfe0b82e00
 
 build:
   entry_points:
@@ -22,8 +22,10 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.5
+    - python >=3.6
     - setuptools >=30.3.0
+    - wheel
+    # for the man page generation:
     - argparse-manpage
     - m2crypto
     - pyopenssl
@@ -32,7 +34,7 @@ requirements:
   run:
     - m2crypto
     - pyopenssl
-    - python >=3.5
+    - python >=3.6
     - requests
     - requests-ecp
 
@@ -43,7 +45,8 @@ test:
     - requests-mock
   commands:
     # check dependencies
-    - python -m pip check
+    - python -m pip check ciecplib
+    - python -m pip show ciecplib
     # run automated tests
     - python -m pytest --pyargs ciecplib
     # validate entry points
