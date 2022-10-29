@@ -1,5 +1,5 @@
 {% set name = "ciecplib" %}
-{% set version = "0.6.0" %}
+{% set version = "0.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 496007dd1eec681ec1314fc89036c6bc5e7a72ec653d84fd3bf852bfe0b82e00
+  sha256: 495c810e28472a10100b24d3a97a48481dc2b8c2a64ba6a41daa654f76718903
 
 build:
   entry_points:
@@ -27,13 +27,11 @@ requirements:
     - wheel
     # for the man page generation:
     - argparse-manpage
-    - m2crypto
-    - pyopenssl
+    - cryptography >=36.0.0
     - requests
     - requests-ecp
   run:
-    - m2crypto
-    - pyopenssl
+    - cryptography >=36.0.0
     - python >=3.6
     - requests
     - requests-ecp
