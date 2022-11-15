@@ -17,7 +17,12 @@ build:
     - ecp-get-cookie = ciecplib.tool.ecp_get_cookie:main
   noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
+  script:
+    - {{ PYTHON }} -m pip install . -vv
+    # move man pages share/man/man1 -> man/man1 so that
+    # they are automatically discovered by man
+    - mkdir -p ${PREFIX}/man/man1
+    - mv ${PREFIX}/share/man/man1/ecp-*.1 ${PREFIX}/man/man1/
 
 requirements:
   host:
@@ -53,7 +58,8 @@ test:
     - ecp-get-cert --help
     - ecp-get-cookie --help
     # sanity check manuals
-    - man -M ${PREFIX}/share/man -w ecp-get-cert
+    - man -w ecp-get-cert
+    - man -Pcat ecp-get-cert
 
 about:
   home: https://ciecplib.readthedocs.io
