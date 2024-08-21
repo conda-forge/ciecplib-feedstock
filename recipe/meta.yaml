@@ -18,11 +18,14 @@ build:
   noarch: python
   number: 0
   script:
+    # build package
     - {{ PYTHON }} -m pip install . -vv
-    # move man pages share/man/man1 -> man/man1 so that
-    # they are automatically discovered by man
+    # generate manpages
+    - {{ PYTHON }} -c "from setuptools import setup; setup()"
+        --command-packages=build_manpages
+        build_manpages
     - mkdir -p ${PREFIX}/man/man1
-    - mv ${PREFIX}/share/man/man1/ecp-*.1 ${PREFIX}/man/man1/
+    - mv -v man/*.1 ${PREFIX}/man/man1/
 
 requirements:
   host:
