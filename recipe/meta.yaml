@@ -1,5 +1,5 @@
 {% set name = "ciecplib" %}
-{% set version = "0.8.0" %}
+{% set version = "0.8.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: f3ca7bc0151666f2f84e90907ebcc3b69d1c817e8a07cd5d43e1e0d692c0a06e
+  sha256: ec1251a1ca39d44f3a6e25ace5fb93edc09f40b8f221f5d23bd010b7173758f4
 
 build:
   entry_points:
@@ -18,11 +18,14 @@ build:
   noarch: python
   number: 0
   script:
+    # build package
     - {{ PYTHON }} -m pip install . -vv
-    # move man pages share/man/man1 -> man/man1 so that
-    # they are automatically discovered by man
+    # generate manpages
+    - {{ PYTHON }} -c "from setuptools import setup; setup()"
+        --command-packages=build_manpages
+        build_manpages
     - mkdir -p ${PREFIX}/man/man1
-    - mv ${PREFIX}/share/man/man1/ecp-*.1 ${PREFIX}/man/man1/
+    - mv -v man/*.1 ${PREFIX}/man/man1/
 
 requirements:
   host:
@@ -49,7 +52,7 @@ test:
     - requests-mock
   commands:
     # check dependencies
-    - python -m pip check ciecplib
+    - python -m pip check
     - python -m pip show ciecplib
     # run automated tests
     - python -m pytest --pyargs ciecplib
