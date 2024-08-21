@@ -21,9 +21,7 @@ build:
     # build package
     - {{ PYTHON }} -m pip install . -vv
     # generate manpages
-    - {{ PYTHON }} -c "from setuptools import setup; setup()"
-        --command-packages=build_manpages
-        build_manpages
+    - {{ PYTHON }} -c "from setuptools import setup; setup()" --command-packages=build_manpages build_manpages
     - mkdir -p ${PREFIX}/man/man1
     - mv -v man/*.1 ${PREFIX}/man/man1/
 
