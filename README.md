@@ -9,7 +9,7 @@ Package license: GPL-3.0-or-later
 
 Summary: A python client for SAML ECP authentication
 
-Development: https://github.com/duncanmmacleod/ciecplib/
+Development: https://git.ligo.org/computing/software/ciecplib/
 
 Documentation: https://ciecplib.readthedocs.io
 
