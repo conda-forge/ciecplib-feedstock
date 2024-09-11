@@ -1,5 +1,5 @@
 {% set name = "ciecplib" %}
-{% set version = "0.8.1" %}
+{% set version = "0.8.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: ec1251a1ca39d44f3a6e25ace5fb93edc09f40b8f221f5d23bd010b7173758f4
+  sha256: 1dc73dbad874131975474b4836347e5180b4c2708ba244f7ad10c4442f7eeca5
 
 build:
   entry_points:
@@ -68,7 +68,7 @@ test:
 about:
   home: https://ciecplib.readthedocs.io
   doc_url: https://ciecplib.readthedocs.io
-  dev_url: https://github.com/duncanmmacleod/ciecplib/
+  dev_url: https://git.ligo.org/computing/software/ciecplib/
   license: GPL-3.0-or-later
   license_family: GPL
   license_file: LICENSE
