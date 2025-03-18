@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 1dc73dbad874131975474b4836347e5180b4c2708ba244f7ad10c4442f7eeca5
 
 build:
@@ -16,21 +16,19 @@ build:
     - ecp-get-cert = ciecplib.tool.ecp_get_cert:main
     - ecp-get-cookie = ciecplib.tool.ecp_get_cookie:main
   noarch: python
-  number: 0
+  number: 1
   script:
     # build package
     - {{ PYTHON }} -m pip install . -vv
     # generate manpages
-    - {{ PYTHON }} -c "from setuptools import setup; setup()"
-        --command-packages=build_manpages
-        build_manpages
+    - {{ PYTHON }} -c "from setuptools import setup; setup()" --command-packages=build_manpages build_manpages
     - mkdir -p ${PREFIX}/man/man1
     - mv -v man/*.1 ${PREFIX}/man/man1/
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
     - setuptools >=30.3.0
     - wheel
     # for the man page generation:
@@ -40,7 +38,7 @@ requirements:
     - requests-ecp
   run:
     - cryptography >=36.0.0
-    - python >=3.6
+    - python >={{ python_min }}
     - python-gssapi
     - requests
     - requests-ecp
@@ -49,6 +47,7 @@ test:
   requires:
     - pip
     - pytest >=3.9.0
+    - python {{ python_min }}
     - requests-mock
   commands:
     # check dependencies
